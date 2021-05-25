@@ -3,11 +3,15 @@ import './App.css';
 
 import useFetch from './hooks/useFetch'
 
+import Search from './components/Search/Search'
+import {myAPIkey} from './coverage'
+
 function App() {
-  const data = useFetch('https://www.googleapis.com/books/v1/volumes?q=php&key=AIzaSyA7qptRezeN4YlCDe47CRcDN8XMNpTG0P8', {})
-  console.log(data)
+  // const data = useFetch(`https://www.googleapis.com/books/v1/volumes?q=php&key=${myAPIkey}`, {})
+ 
   return (
     <div className="App">
+       <Search />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
