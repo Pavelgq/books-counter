@@ -4,15 +4,23 @@ import {myAPIkey} from '../../coverage'
 
 const Search = () => {
     const [books, setBooks] = useState('php')
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${books}&key=${myAPIkey}`
     const [data, setData] = useState()
-    const {booksData, loading, error} = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${books}&key=${myAPIkey}`, {})
+    const [{booksData, loading, error}, doFetch] = useFetch(url)
     const handleChange = (event) => {
-        setBooks(event.target.value)    
+        console.log(event.target.value)
+        // setBooks(event.target.value)    
     }
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(data)
     }
+
+    useEffect(() => {
+        doFetch()
+    }, [doFetch])
+
+    console.log(loading, error)
 
     console.log(booksData)
     return (

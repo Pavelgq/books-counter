@@ -1,44 +1,45 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 
 
-const useFetch = (url, options) => {
-    const [status, setStatus] = useState(
-        {
-            isLoading: false,
-            data: undefined,
-            error: undefined
+const useFetch = (url) => {
+    const [response, setResponce] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [options, setOptions] = useState({})
+
+    const doFetch = useCallback((fetchOptions = {}) => {
+        setOptions(fetchOptions)
+        setIsLoading(true)
+    }, [])
+
+
+    useEffect(() => {
+        let skipGetResponseAfterDestroy = false
+        if (!isLoading) {
+            return false
         }
-    )
-
-    const doFetch = (url, options) => {
-        setStatus( {
-            isLoading: true
-        })
         fetch(url, options)
             .then((res) => {
                 return res.json()
             })
             .then((res) => {
-                setStatus({
-                    isLoading: false,
-                    data: res.data,
-                })
+                if (!skipGetResponseAfterDestroy) {
+                    setResponce(res.data)
+                    setIsLoading(false)
+                }
             })
             .catch((error) => {
-                setStatus({
-                    isLoading: false,
-                    error: error
-                })
+                if (!skipGetResponseAfterDestroy) {
+                    setError(error)
+                    setIsLoading(false)
+                }
             })
-    }
+            return () => {
+                skipGetResponseAfterDestroy = true
+            }
+    }, [isLoading, url, options])
 
-    useEffect(() => {
-        if (url) {
-            doFetch(url, options)
-        }
-    }, [])
-    
-    return {...status, doFetch}
+    return [{response, isLoading, error}, doFetch]
 }
 
 export default useFetch
