@@ -5,30 +5,35 @@ import {myAPIkey} from '../../coverage'
 const Search = () => {
     const [books, setBooks] = useState('php')
     const url = `https://www.googleapis.com/books/v1/volumes?q=${books}&key=${myAPIkey}`
-    const [data, setData] = useState()
-    const [{booksData, loading, error}, doFetch] = useFetch(url)
+    const [data, setData] = useState(null)
+    const [{response, isLoading, error}, doFetch] = useFetch(url)
     const handleChange = (event) => {
-        console.log(event.target.value)
-        // setBooks(event.target.value)    
+        setBooks(event.target.value)
     }
+    
+    const [isSearch, setIsSearch]  = useState(false);
     const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(data)
+        event.preventDefault()  
+        setIsSearch(true);
+        setData(response)
     }
 
     useEffect(() => {
-        doFetch()
-    }, [doFetch])
-
-    console.log(loading, error)
-
-    console.log(booksData)
+        if (isSearch) {
+            doFetch()
+        }
+        setIsSearch(false)
+    }, [doFetch, isSearch])
     return (
-        <form onSubmit={handleSubmit}>
-             <input type="text" value={books} placeholder="Search" onChange={handleChange} />
-            <button type="submit">Отправить</button>
-            <div>{booksData}</div>
-        </form>
+        <>
+            <form onSubmit={handleSubmit}>
+                {isLoading && 'loading...'}
+                <input type="text" value={books} placeholder="Search" onChange={handleChange} />
+                <button type="submit">Отправить</button>
+               {books}
+            </form>
+            <div>{response && response.totalItems}</div>
+        </>
     )
 }
 

@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react"
 
 
 const useFetch = (url) => {
-    const [response, setResponce] = useState(null)
+    const [response, setResponce] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [options, setOptions] = useState({})
@@ -20,12 +20,15 @@ const useFetch = (url) => {
         }
         fetch(url, options)
             .then((res) => {
+                console.log(res)
                 return res.json()
             })
             .then((res) => {
                 if (!skipGetResponseAfterDestroy) {
-                    setResponce(res.data)
+                    console.log(res)
+                    setResponce(res)
                     setIsLoading(false)
+                    
                 }
             })
             .catch((error) => {
