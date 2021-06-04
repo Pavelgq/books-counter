@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import useFetch from '../../hooks/useFetch'
+import BooksContext from '../../contexts/booksContext'
+
 import {myAPIkey} from '../../coverage'
+
 
 const Search = () => {
     const [books, setBooks] = useState('php')
     const url = `https://www.googleapis.com/books/v1/volumes?q=${books}&key=${myAPIkey}`
-    const [data, setData] = useState(null)
+    
+    const {data, setData} = useContext(BooksContext)
+
     const [{response, isLoading, error}, doFetch] = useFetch(url)
     const handleChange = (event) => {
         setBooks(event.target.value)
@@ -14,16 +19,17 @@ const Search = () => {
     const [isSearch, setIsSearch]  = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault()  
+        doFetch();
         setIsSearch(true);
-        setData(response)
     }
 
     useEffect(() => {
-        if (isSearch) {
-            doFetch()
+        if (!response) {
+            return
         }
+        setData(response)
         setIsSearch(false)
-    }, [doFetch, isSearch])
+    }, [response, isSearch])
     return (
         <>
             <form onSubmit={handleSubmit}>

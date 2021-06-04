@@ -1,17 +1,18 @@
-import logo from './logo.svg';
+
+import React, {useState} from 'react'
+
+import BooksContext from './contexts/booksContext'
 import './App.css';
-
-import useFetch from './hooks/useFetch'
-
-import Search from './components/Search/Search'
-import {myAPIkey} from './coverage'
+import Main from './pages/main';
 
 function App() {
-  // const data = useFetch(`https://www.googleapis.com/books/v1/volumes?q=php&key=${myAPIkey}`, {})
- 
+  const [data, setData] = useState(null)
   return (
     <div className="App">
-       <Search />
+       <BooksContext.Provider value={{data, setData}} >
+          <Main />
+       </BooksContext.Provider>
+      
     </div>
   );
 }
