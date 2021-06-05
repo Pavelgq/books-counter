@@ -1,0 +1,17 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+
+    width: 30%;
+}
+
+.title {
+    text-decoration: none;
+}
+
+.image {
+    border: 1px solid #fff111;
+}
+    
