@@ -19,10 +19,9 @@ const Main = () => {
                 {books}
             </div>
             <div>
-                
                 <NavLink 
                     to={`/library`}
-              >Мои книги</NavLink>
+                >Мои книги</NavLink>
             </div>
         </>
     )
