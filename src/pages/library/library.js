@@ -20,13 +20,15 @@ const Library = () => {
         // myBooks.splice(index, 1)
     }
     const cards = myBooks && myBooks.map((book) => 
-        (<BookProcess data={book} key={book.id} handleDelete={handleDelete}></BookProcess>))
+        (<li className={styles.list}>
+            <BookProcess data={book} key={book.id} handleDelete={handleDelete}></BookProcess>
+        </li>))
     return (
         <div className={styles.container}>
             <h2>Books</h2>
-            <div className={styles.grid}>
+            <ul className={styles.grid}>
                  {cards}
-            </div>
+            </ul>
         </div>
     )
 }

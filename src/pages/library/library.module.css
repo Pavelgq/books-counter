@@ -7,3 +7,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.list {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px 8px 24px 24px;
+}
