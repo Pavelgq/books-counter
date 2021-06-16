@@ -1,4 +1,27 @@
 .container {
+    width: 640px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.nav {
+    margin-bottom: 20px;
+}
+
+.link {
+
 }

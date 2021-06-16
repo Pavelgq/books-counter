@@ -8,6 +8,7 @@ import useLocalStorage from './hooks/useLocalStorage'
 import Routes from './routes'
 import BooksContext from './contexts/booksContext'
 import LibraryContext from './contexts/libraryContext'
+import TopBar from './components/TopBar/TopBar'
 import './App.module.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
        <BooksContext.Provider value={{data, setData}} >
          <LibraryContext.Provider value={{library, setLibrary}}>
             <Router>
+              <TopBar />
               <Routes />
             </Router>
          </LibraryContext.Provider>

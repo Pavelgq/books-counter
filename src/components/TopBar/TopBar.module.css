@@ -1,0 +1,22 @@
+.nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.link {
+    
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 10px 5px;
+}
+
+.activeLink {
+    text-decoration: none;
+    cursor:inherit;
+    color: black;
+    
+}
+.activeLink:active {
+    color:inherit
+}

@@ -13,17 +13,15 @@ const Main = () => {
     console.log(data)
     const books = data && data.items.map((book, index) => (<BookCard data={book} key={book.id}></BookCard>))
     return (
-        <> 
+        <section className={styles.container}> 
             <Search></Search>
-            <div className={styles.container}>
+            <ul className={styles.list}>
                 {books}
-            </div>
+            </ul>
             <div>
-                <NavLink 
-                    to={`/library`}
-                >Мои книги</NavLink>
+                
             </div>
-        </>
+        </section>
     )
 }
 

@@ -4,6 +4,7 @@ import BooksContext from '../../contexts/booksContext'
 
 import {myAPIkey} from '../../coverage'
 
+import styles from './Search.module.css'
 
 const Search = () => {
     const [books, setBooks] = useState('php')
@@ -32,11 +33,11 @@ const Search = () => {
     }, [response, isSearch])
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                {isLoading && 'loading...'}
-                <input type="text" value={books} placeholder="Search" onChange={handleChange} />
-                <button type="submit">Отправить</button>
-               {books}
+            <form className={styles.form} onSubmit={handleSubmit}>
+                {isLoading && (<p className={styles.title}>Loading...</p>)}
+                {!isLoading && (<p className={styles.title}>Найти книгу</p>)}
+                <input type="text" className={styles.field} value={books} placeholder="Search" onChange={handleChange} />
+                <button type="submit" className={styles.button}>Поиск</button>
             </form>
             <div>{response && response.totalItems}</div>
         </>

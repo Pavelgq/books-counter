@@ -55,12 +55,7 @@ const BookProcess = ({data, handleDelete, handlePages}) => {
                     <span>Процент: </span> 
                     <span>{persent}%</span>
                 </p>
-                
             </div>
-            
-           
-
-            
         </>
     )
 }
